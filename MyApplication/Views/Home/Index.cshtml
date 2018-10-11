@@ -1,0 +1,15 @@
+﻿@using MyApplication.Models;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@{ 
+    var user = Session["user"] as User;
+}
+
+@if (user != null)
+{
+<h3>You are signed in as @user.Name</h3>
+    @Html.ActionLink("Logout", "Logout", "Login"); 
+}
