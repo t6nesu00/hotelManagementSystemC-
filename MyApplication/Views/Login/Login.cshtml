@@ -2,15 +2,34 @@
 @{
     ViewBag.Title = "Login";
 }
+<style type="text/css" media="screen">
+    body{
+        background: url( ../../Images/hotelPicture.jpg);
+    }
 
-<h2>Login</h2>
-@using (Html.BeginForm())
-{
-    <div>@Html.Label("Login name")</div>
-    <div>@Html.TextBox("name")</div>
-    <div>@Html.Label("Password")</div>
-    <div>@Html.TextBox("password")</div>
-    <input type="submit" value="Login" />
+    #loginBox {
+        background-color: honeydew;
+        top: 40%;
+        left:40%;
+        padding: 1px 10px;
+        border: 5px solid white;
+        margin-top:100px;
+        opacity: 0.9;
+    }
+</style>
 
-}
+
+<div id="loginBox">
+    <h2>Login to use the system</h2>
+    @using (Html.BeginForm())
+    {
+        <div>@Html.Label("Login name")</div>
+        <div>@Html.TextBox("name")</div>
+        <div>@Html.Label("Password")</div>
+        <div>@Html.TextBox("password")</div><br />
+        <input type="submit" value="Login" />
+
+    }
+</div>
+
 
