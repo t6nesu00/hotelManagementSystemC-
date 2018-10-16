@@ -2,14 +2,53 @@
 @{
     ViewBag.Title = "Index";
 }
+<!--styling parts starts-->
+ 
+<style>
+    body { 
+        background-color: antiquewhite;
+    }
+    #logoutIcon {
+        float: right;
+    }
+    .navbar-header li {
+        list-style: none;
+        margin: 0;
+    }
+    .navbar-header li {
+        padding: 15px;
+        position: relative;
+        width: 200px;
+        background-color: lightblue;
+        color: #fff;
+        text-decoration: none;
+        border-top: 1px solid #ffffff;
+    }
+</style>
+<!--styling parts ends-->
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
 
-<h2>Index</h2>
-@{ 
+<h2>Hello</h2>
+<div id="logoutIcon">@Html.ActionLink("Logout", "Logout", "Login")</div>
+
+@{
     var user = Session["user"] as User;
 }
 
 @if (user != null)
 {
-<h3>You are signed in as @user.Name</h3>
-    @Html.ActionLink("Logout", "Logout", "Login"); 
+    <h3>You are loged in as @user.Name</h3>
+    <div class="container">
+        
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <li><span class="glyphicon glyphicon-new-window"></span> @Html.ActionLink("Rooms", "Rooms")</li>
+                    <li><span class="glyphicon glyphicon-bookmark"></span> @Html.ActionLink("Booking", "BookNow")</li>
+                    <li><span class="glyphicon glyphicon-user"></span> @Html.ActionLink("Customers", "Index", "List")</li>
+                </div>
+            </div>
+        
+    </div>
+    
+
 }
