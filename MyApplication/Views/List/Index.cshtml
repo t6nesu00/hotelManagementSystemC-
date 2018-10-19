@@ -4,33 +4,39 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br />
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <!--@Html.ActionLink("Create New", "Create") -->
+    <a href="@Url.Action("Create", "List")" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i> Add New</a>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SecondName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-striped">
+    <thead class="table-hover">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecondName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomNo)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
 
 @foreach (var item in Model) {
     <tr>
@@ -53,9 +59,12 @@
             @Html.DisplayFor(modelItem => item.EndDate)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CusotmerId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CusotmerId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CusotmerId })
+            @Html.DisplayFor(modelItem => item.RoomNo)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit", "List", new { id = item.CusotmerId})" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+            <!--@Html.ActionLink("Edit", "Edit", new { id = item.CusotmerId })  -->
+            <a href="@Url.Action("Delete", "List", new { id = item.CusotmerId})" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> Delete</a>
         </td>
     </tr>
 }

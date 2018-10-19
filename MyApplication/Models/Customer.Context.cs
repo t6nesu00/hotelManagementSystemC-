@@ -13,10 +13,10 @@ namespace MyApplication.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CustomerEntities : DbContext
+    public partial class CustomerEntities1 : DbContext
     {
-        public CustomerEntities()
-            : base("name=CustomerEntities")
+        public CustomerEntities1()
+            : base("name=CustomerEntities1")
         {
         }
     

@@ -9,7 +9,7 @@ namespace MyApplication.Controllers
 {
     public class ListController : Controller
     {
-        private CustomerEntities _db = new CustomerEntities();
+        private CustomerEntities1 _db = new CustomerEntities1();
         // GET: List
         public ActionResult Index()
         {
@@ -44,45 +44,53 @@ namespace MyApplication.Controllers
         // GET: List/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var listToEdit = (from m in _db.Customers
+                              where m.CusotmerId == id
+                              select m).First();
+            return View(listToEdit);
         }
 
         // POST: List/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Customer listToEdit)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var originalCustomer = (from m in _db.Customers
+                                    where m.CusotmerId == listToEdit.CusotmerId
+                                    select m).First();
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            if (!ModelState.IsValid)
+                return View(originalCustomer);
+
+            _db.Entry(originalCustomer).CurrentValues.SetValues(listToEdit);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
+
         }
 
         // GET: List/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var listToDelete = (from m in _db.Customers
+                              where m.CusotmerId == id
+                              select m).First();
+            return View(listToDelete);
+            
         }
 
         // POST: List/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(Customer listToDelete, int id = 0)
         {
-            try
+            Customer customer = _db.Customers.Find(id);
+            if (customer == null)
             {
-                // TODO: Add delete logic here
+                return HttpNotFound();
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            _db.Customers.Remove(customer);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
